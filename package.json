@@ -1,17 +1,26 @@
 {
   "name": "@empireoe/sdk",
-  "version": "0.1.0",
-  "description": "Official TypeScript SDK for the EmpireOE API",
+  "version": "0.2.0",
+  "description": "Official TypeScript SDK for the EmpireOE API — auto-generated types from OpenAPI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate": "bash scripts/generate-types.sh"
   },
   "files": ["dist", "src"],
   "license": "UNLICENSED",
   "private": true,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/empireoe-ai/empireoe-sdk.git"
+  },
   "devDependencies": {
-    "typescript": "^5.4.0"
+    "openapi-typescript": "^7.6.0",
+    "typescript": "^5.7.0"
   }
 }
