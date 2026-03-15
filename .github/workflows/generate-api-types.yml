@@ -1,0 +1,43 @@
+name: Generate API Types
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: "API base URL to fetch OpenAPI schema from"
+        required: true
+        default: "https://api.example.com"
+      product:
+        description: "Product name (esa, empireo, lwe, empire-digital, egpn, after-services)"
+        required: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install openapi-typescript
+        run: npm install -D openapi-typescript
+
+      - name: Fetch OpenAPI schema
+        run: curl -sL "${{ inputs.api_url }}/openapi.json" -o /tmp/openapi.json
+
+      - name: Generate types
+        run: npx openapi-typescript /tmp/openapi.json -o "src/types/${{ inputs.product }}.ts"
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "feat: update ${{ inputs.product }} API types from OpenAPI schema"
+          title: "Update ${{ inputs.product }} API types"
+          branch: "types/${{ inputs.product }}-update"
+          body: "Auto-generated from `${{ inputs.api_url }}/openapi.json`"
