@@ -1,6 +1,6 @@
 {
   "name": "@empireoe-ai/sdk",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Official TypeScript SDK for the EmpireOE API — auto-generated types from OpenAPI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
