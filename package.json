@@ -1,6 +1,6 @@
 {
-  "name": "@empireoe-ai/sdk",
-  "version": "1.0.1",
+  "name": "@empireo-org/sdk",
+  "version": "1.0.2",
   "description": "Official TypeScript SDK for the EmpireOE API — auto-generated types from OpenAPI",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/empireoe-ai/empireoe-sdk.git"
+    "url": "https://github.com/empireO-Org/empireoe-sdk.git"
   },
   "devDependencies": {
     "openapi-typescript": "^7.6.0",

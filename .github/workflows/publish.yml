@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: "22"
           registry-url: "https://npm.pkg.github.com"
-          scope: "@empireoe"
+          scope: "@empireo-org"
 
       - run: npm ci
       - run: npm run build
