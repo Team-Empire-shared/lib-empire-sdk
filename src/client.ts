@@ -1,6 +1,7 @@
 import { APIError, QuotaExceededError, RateLimitError } from "./errors";
 import type {
-  AgentChatRequest, AgentChatResponse, ApprovalDecision, ApprovalRead,
+  AgentChatRequest, AgentChatResponse, ApiKeyCreateResponse, ApiKeyListResponse,
+  ApprovalDecision, ApprovalRead,
   CampaignABTestResult, CampaignVariantCreate, CampaignVariantRead, CampaignVariantStats,
   ContactCreate, ContactListResponse, ContactRead, ContactUpdate,
   DealCreate, DealRead, DealUpdate,
