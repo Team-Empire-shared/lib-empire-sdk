@@ -6,7 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
+    "test": "echo 'No unit tests — type safety enforced by build' && exit 0",
     "generate": "bash scripts/generate-types.sh"
   },
   "files": ["dist", "src"],
