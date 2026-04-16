@@ -11,7 +11,10 @@
     "test": "echo 'No unit tests — type safety enforced by build' && exit 0",
     "generate": "bash scripts/generate-types.sh"
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "license": "UNLICENSED",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -21,6 +24,7 @@
     "url": "https://github.com/empireO-Org/empireoe-sdk.git"
   },
   "devDependencies": {
+    "@types/node": "^25.6.0",
     "openapi-typescript": "^7.6.0",
     "typescript": "^5.7.0"
   }
