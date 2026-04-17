@@ -1,4 +1,4 @@
 node_modules/
-dist/
+# dist/ is committed so git-dependency consumers (Vercel) can install without a build step
 .env
 .DS_Store
