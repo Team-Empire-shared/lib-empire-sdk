@@ -1,11 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.QuotaExceededError = exports.RateLimitError = exports.APIError = exports.SDKError = void 0;
-class SDKError extends Error {
-    constructor(message) { super(message); this.name = "SDKError"; }
+export class SDKError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "SDKError";
+    }
 }
-exports.SDKError = SDKError;
-class APIError extends SDKError {
+export class APIError extends SDKError {
     constructor(message, statusCode, detail, requestId, body) {
         super(message);
         this.name = "APIError";
@@ -15,19 +14,16 @@ class APIError extends SDKError {
         this.body = body;
     }
 }
-exports.APIError = APIError;
-class RateLimitError extends APIError {
+export class RateLimitError extends APIError {
     constructor(message, statusCode, detail, requestId, body, retryAfterSeconds) {
         super(message, statusCode, detail, requestId, body);
         this.name = "RateLimitError";
         this.retryAfterSeconds = retryAfterSeconds;
     }
 }
-exports.RateLimitError = RateLimitError;
-class QuotaExceededError extends RateLimitError {
+export class QuotaExceededError extends RateLimitError {
     constructor(message, statusCode, detail, requestId, body, retryAfterSeconds) {
         super(message, statusCode, detail, requestId, body, retryAfterSeconds);
         this.name = "QuotaExceededError";
     }
 }
-exports.QuotaExceededError = QuotaExceededError;

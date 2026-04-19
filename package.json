@@ -1,27 +1,42 @@
 {
-  "name": "@empireo-org/sdk",
-  "version": "1.0.2",
-  "description": "Official TypeScript SDK for the EmpireOE API — auto-generated types from OpenAPI",
+  "name": "@empireoe/sdk",
+  "version": "3.2.1",
+  "description": "Typed BOS API client for Empire Overseas Education frontends",
+  "private": false,
+  "type": "module",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "build": "tsc",
-    "lint": "tsc --noEmit",
-    "typecheck": "tsc --noEmit",
-    "test": "echo 'No unit tests — type safety enforced by build' && exit 0",
-    "generate": "bash scripts/generate-types.sh"
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build"
   },
-  "files": ["dist", "src"],
-  "license": "UNLICENSED",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
+  "keywords": [
+    "empire",
+    "bos",
+    "sdk",
+    "api"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/empireO-Org/empireoe-sdk.git"
+    "url": "https://github.com/nidinnover-hash/Team-Empire-BOS-"
   },
   "devDependencies": {
-    "openapi-typescript": "^7.6.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.8.2"
   }
 }

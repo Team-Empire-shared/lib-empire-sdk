@@ -1,47 +1,39 @@
-export { EmpireOClient } from "./client";
-export type { ClientOptions, RequestEvent } from "./client";
-export type {
-  // Auth
-  UserMeRead, LoginRequest, LoginResponse,
-  // API Keys
-  ApiKeyCreate, ApiKeyCreateResponse, ApiKeyListResponse, ApiKeyRead,
-  // Contacts
-  ContactCreate, ContactRead, ContactUpdate, ContactListResponse,
-  // Leads
-  LeadRead,
-  // Deals
-  DealCreate, DealRead, DealUpdate,
-  // Notes
-  NoteCreate, NoteRead,
-  // Events
-  EventCreate, EventRead,
-  // Projects
-  ProjectCreate, ProjectRead,
-  // Tasks
-  TaskCreate, TaskRead, TaskUpdate,
-  // Approvals
-  ApprovalDecision, ApprovalRead,
-  // Organizations
-  OrganizationCreate, OrganizationRead,
-  // Integrations
-  IntegrationRead,
-  // Notifications
-  NotificationRead,
-  // Webhooks
-  WebhookDeliveryListResponse, WebhookDeliveryRead,
-  WebhookEndpointCreate, WebhookEndpointCreateResponse,
-  WebhookEndpointListResponse, WebhookEndpointRead,
-  // Automations
-  TriggerCreate, TriggerRead,
-  // AI Agents
-  AgentChatRequest, AgentChatResponse, MultiTurnResponse,
-  // EGPN
-  EGPNPartnerRegistration, EGPNPartnerRead,
-  // Campaigns
-  CampaignVariantCreate, CampaignVariantRead, CampaignVariantStats, CampaignABTestResult,
-  // Health
-  HealthCheckResponse,
-  // Pagination
-  PaginatedResponse,
-} from "./types";
-export { APIError, RateLimitError, QuotaExceededError, SDKError } from "./errors";
+export * from "./client";
+export * from "./errors";
+export * from "./types";
+export * from "./services";
+
+// Convenience factory — creates both the raw client and the grouped SDK in one call
+import { NidinBOSClient, type ClientOptions } from "./client";
+import { createSDK, type EmpireSDK } from "./services";
+
+export { createSDK };
+
+/**
+ * createClient — preferred entry point for all frontends.
+ *
+ * Returns an EmpireSDK with grouped service namespaces AND
+ * a `_client` escape hatch for raw endpoint access.
+ *
+ * @example
+ * ```ts
+ * import { createClient } from "@empireoe/sdk";
+ *
+ * const sdk = createClient({
+ *   baseUrl: process.env.NEXT_PUBLIC_BOS_URL!,
+ *   apiKey:  process.env.NEXT_PUBLIC_BOS_API_KEY!,
+ * });
+ *
+ * // Grouped service calls
+ * const contacts = await sdk.contacts.list({ limit: 25 });
+ * const courses  = await sdk.learning.courses.list({ published_only: true });
+ * const pipeline = await sdk.recruitment.pipeline();
+ *
+ * // Escape hatch for raw methods
+ * const raw = await sdk._client.getApiV1DashboardExecutive();
+ * ```
+ */
+export function createClient(options: ClientOptions): EmpireSDK {
+  const client = new NidinBOSClient(options);
+  return createSDK(client);
+}

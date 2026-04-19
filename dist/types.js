@@ -1,2 +1,2 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// Generated from sdk/openapi/openapi.json by scripts/generate_sdk_models.py
+export {};

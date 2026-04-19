@@ -1,44 +1,44 @@
-# Team Empire SDK
+# @empireoe/sdk
 
-TypeScript SDK wrapping all Team Empire product APIs.
+Typed API client for all Empire Overseas Education frontends (EmpireO.AI, EOE, Empire Digital, LWE, EGPN, After Services).
 
 ## Install
+
 ```bash
 npm install @empireoe/sdk
 ```
 
 ## Usage
-```typescript
-import { createClient } from "@empireoe/sdk"
 
-const client = createClient({
-  baseUrl: "https://api.empireoe.com",
-  token: "your-jwt-token",
-})
+```ts
+import { createClient } from "@empireoe/sdk";
 
-// Contacts
-const contacts = await client.contacts.list()
+const sdk = createClient({
+  baseUrl: process.env.NEXT_PUBLIC_BOS_URL!,
+  apiKey:  process.env.NEXT_PUBLIC_BOS_API_KEY!,
+});
 
-// Deals
-const deals = await client.deals.list({ stage: "proposal" })
+// Grouped service namespaces
+const contacts  = await sdk.contacts.list({ limit: 25 });
+const courses   = await sdk.learning.courses.list({ published_only: true });
+const pipeline  = await sdk.recruitment.pipeline();
+const partners  = await sdk.egpn.leaderboard();
 
-// Tasks
-const task = await client.tasks.create({ title: "Follow up" })
+// Raw endpoint escape hatch
+const raw = await sdk._client.getApiV1DashboardExecutive();
 ```
 
-## APIs Covered
-- Contacts / CRM
-- Deals / Pipeline
-- Tasks / Projects
-- Email
-- Approvals
-- Integrations
-- Search
+## Build from source
 
-## Development
 ```bash
+cd sdk/typescript
 npm install
 npm run build
-npm test
 ```
 
+## Client behavior
+
+- Retry / backoff for `429`, `502`, `503`, `504`
+- `Retry-After` header aware
+- Throws `QuotaExceededError` for quota-specific `429` responses
+- Optional request observability callback via `onRequestEvent`
