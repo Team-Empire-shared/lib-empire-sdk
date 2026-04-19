@@ -5,6 +5,8 @@ export * from "./services";
 // Convenience factory — creates both the raw client and the grouped SDK in one call
 import { NidinBOSClient } from "./client";
 import { createSDK } from "./services";
+// Backwards-compat alias — dashboards that import EmpireOClient continue to work
+export { NidinBOSClient as EmpireOClient } from "./client";
 export { createSDK };
 /**
  * createClient — preferred entry point for all frontends.

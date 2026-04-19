@@ -7,6 +7,9 @@ export * from "./services";
 import { NidinBOSClient, type ClientOptions } from "./client";
 import { createSDK, type EmpireSDK } from "./services";
 
+// Backwards-compat alias — dashboards that import EmpireOClient continue to work
+export { NidinBOSClient as EmpireOClient } from "./client";
+
 export { createSDK };
 
 /**

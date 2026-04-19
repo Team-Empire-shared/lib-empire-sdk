@@ -4,6 +4,7 @@ export * from "./types";
 export * from "./services";
 import { type ClientOptions } from "./client";
 import { createSDK, type EmpireSDK } from "./services";
+export { NidinBOSClient as EmpireOClient } from "./client";
 export { createSDK };
 /**
  * createClient — preferred entry point for all frontends.
